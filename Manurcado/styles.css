@@ -1,0 +1,227 @@
+/* Fuente pixel futurista */
+@import url('http://fonts.cdnfonts.com/css/sf-pixelate');
+
+body {
+    background: radial-gradient(circle at center, #0a0a0a 0%, #050505 100%);
+    font-family: 'SF Pixelate', sans-serif;
+    color: #00fff7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    margin: 0;
+    padding: 20px;
+    overflow: hidden;
+}
+
+h1, h2 {
+    font-size: 2rem;
+    text-shadow: 0 0 10px #00fff7, 0 0 20px #00d1ff, 0 0 30px #008cff;
+    margin-bottom: 20px;
+}
+
+#canvas {
+    background-color: rgba(0, 255, 247, 0.192);
+    border: 3px solid #00fff7;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #00fff7, inset 0 0 10px #00fff7;
+    margin-bottom: 20px;
+}
+
+#wordContainer {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+    font-size: 2rem;
+    letter-spacing: 5px;
+    text-shadow: 0 0 8px #000000, 0 0 15px #000000;
+}
+
+#usedLetters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+#usedLetters span {
+    background: rgba(255, 0, 255, 0.214);
+    border: 2px solid #ff00ff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 8px #ff00ff;
+}
+
+button {
+    background: transparent;
+    color: #00fff7;
+    font-size: 1.2rem;
+    border: 2px solid #00fff7;
+    padding: 10px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-shadow: 0 0 5px #00fff7;
+    box-shadow: 0 0 10px #00fff7, inset 0 0 10px #00fff7;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #00fff7;
+    color: #000;
+    box-shadow: 0 0 20px #00fff7, 0 0 30px #00d1ff;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* Animación de aparición */
+@keyframes neonFade {
+    0% { opacity: 0; text-shadow: none; }
+    100% { opacity: 1; text-shadow: 0 0 10px #00fff7, 0 0 20px #00d1ff; }
+}
+
+h1 #wordContainer, button {
+    animation: neonFade 1s ease forwards;
+}
+
+/* Letras del contenedor de palabra */
+.letter {
+    border-bottom: 2px solid #00fff7;
+    width: 25px;
+    text-align: center;
+    display: inline-block;
+    user-select: none;
+    font-size: 2rem;
+    color: #00fff7;
+}
+
+#teclado {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#teclado button {
+  background: #00fff7;
+  color: black;
+  font-size: 1.2rem;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+/* Ocultar letra pero mantener línea visible */
+.hidden {
+    color: transparent;
+}
+
+/* Evitar que se note al seleccionar la letra oculta */
+.hidden::selection {
+    background: transparent;
+}
+
+#particleContainer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible; /* Para que las partículas no se corten si salen fuera */
+  z-index: 1000; /* Para que esté sobre el canvas y otros elementos */
+}
+
+/* Responsive para tablets */
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+  #wordContainer {
+    font-size: 1.5rem;
+    gap: 6px;
+    letter-spacing: 3px;
+  }
+  .letter {
+    width: 20px;
+    font-size: 1.5rem;
+  }
+  #usedLetters span {
+    padding: 4px 8px;
+    font-size: 0.9rem;
+  }
+  button {
+    font-size: 1rem;
+    padding: 8px 20px;
+  }
+  #canvas {
+    width: 280px;
+    height: 150px;
+  }
+}
+
+/* Responsive para móviles */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+  h1, h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+  #wordContainer {
+    font-size: 1.2rem;
+    gap: 4px;
+    letter-spacing: 2px;
+    margin: 15px 0;
+  }
+  .letter {
+    width: 18px;
+    font-size: 1.2rem;
+  }
+  #usedLetters span {
+    padding: 3px 6px;
+    font-size: 0.8rem;
+  }
+  button {
+    font-size: 0.9rem;
+    padding: 6px 15px;
+  }
+  #canvas {
+    width: 240px;
+    height: 130px;
+  }
+}
+
+/* Responsive para móviles muy pequeños */
+@media (max-width: 400px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  #wordContainer {
+    font-size: 1rem;
+    gap: 3px;
+    letter-spacing: 1.5px;
+  }
+  .letter {
+    width: 16px;
+    font-size: 1rem;
+  }
+  #usedLetters span {
+    padding: 2px 5px;
+    font-size: 0.7rem;
+  }
+  button {
+    font-size: 0.8rem;
+    padding: 5px 12px;
+  }
+  #canvas {
+    width: 200px;
+    height: 110px;
+  }
+}
